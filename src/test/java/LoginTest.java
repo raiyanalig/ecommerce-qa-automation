@@ -1,33 +1,17 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
-public class LoginTest {
-
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.saucedemo.com/");
-    }
+public class LoginTest extends BaseTest {
 
     @Test
     public void validLoginTest() {
 
-        driver.findElement(By.id("user-name"))
-                .sendKeys("standard_user");
+        LoginPage loginPage = new LoginPage(driver);
 
-        driver.findElement(By.id("password"))
-                .sendKeys("secret_sauce");
-
-        driver.findElement(By.id("login-button"))
-                .click();
+        loginPage.enterUsername("standard_user");
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLogin();
 
         String currentUrl = driver.getCurrentUrl();
 
@@ -37,8 +21,22 @@ public class LoginTest {
         );
     }
 
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
+    @Test
+    public void invalidPasswordTest() {
+
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.enterUsername("standard_user");
+        loginPage.enterPassword("wrong_password");
+        loginPage.clickLogin();
+
+        boolean errorDisplayed = driver.findElement(
+                org.openqa.selenium.By.cssSelector("[data-test='error']")
+        ).isDisplayed();
+
+        Assert.assertTrue(
+                errorDisplayed,
+                "Error message was not displayed"
+        );
     }
 }
