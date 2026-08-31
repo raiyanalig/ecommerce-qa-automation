@@ -1,0 +1,58 @@
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import pages.CartPage;
+import pages.LoginPage;
+import pages.ProductPage;
+
+public class CartTest extends BaseTest {
+
+    @Test
+    public void verifyCartWithProduct() {
+
+        LoginPage loginPage = new LoginPage(driver);
+        ProductPage productPage = new ProductPage(driver);
+        CartPage cartPage = new CartPage(driver);
+
+        loginPage.enterUsername("standard_user");
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLogin();
+
+        productPage.addFirstProductToCart();
+        productPage.openCart();
+
+        Assert.assertTrue(
+                cartPage.isCartPageDisplayed(),
+                "Cart page was not displayed"
+        );
+
+        Assert.assertEquals(
+                cartPage.getCartItemCount(),
+                1,
+                "Cart should contain one product"
+        );
+    }
+
+    @Test
+    public void removeProductFromCart() {
+
+        LoginPage loginPage = new LoginPage(driver);
+        ProductPage productPage = new ProductPage(driver);
+        CartPage cartPage = new CartPage(driver);
+
+        loginPage.enterUsername("standard_user");
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLogin();
+
+        productPage.addFirstProductToCart();
+        productPage.openCart();
+
+        cartPage.removeFirstProduct();
+
+        Assert.assertEquals(
+                cartPage.getCartItemCount(),
+                0,
+                "Product was not removed from cart"
+        );
+    }
+}

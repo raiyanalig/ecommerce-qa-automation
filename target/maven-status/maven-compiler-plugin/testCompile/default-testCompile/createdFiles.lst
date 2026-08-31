@@ -1,1 +1,10 @@
-LoginPage.class
+CheckoutTest.class
+LogoutTest.class
+pages\ProductPage.class
+pages\LoginPage.class
+ProductTest.class
+pages\CartPage.class
+pages\CheckoutPage.class
+CartTest.class
+LoginTest.class
+BaseTest.class
