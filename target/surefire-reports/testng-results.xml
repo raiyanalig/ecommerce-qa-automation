@@ -2,32 +2,32 @@
 <testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-08-31T17:50:02 IST" name="Surefire suite" finished-at="2026-08-31T17:50:06 IST" duration-ms="4233">
+  <suite started-at="2026-08-31T18:03:00 IST" name="Surefire suite" finished-at="2026-08-31T18:03:04 IST" duration-ms="4360">
     <groups>
     </groups>
-    <test started-at="2026-08-31T17:50:02 IST" name="Surefire test" finished-at="2026-08-31T17:50:06 IST" duration-ms="4233">
+    <test started-at="2026-08-31T18:03:00 IST" name="Surefire test" finished-at="2026-08-31T18:03:04 IST" duration-ms="4360">
       <class name="LoginTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T17:50:02 IST" name="setUp" finished-at="2026-08-31T17:50:04 IST" duration-ms="1771" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T18:03:00 IST" name="setUp" finished-at="2026-08-31T18:03:02 IST" duration-ms="2381" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="invalidPasswordTest()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T17:50:04 IST" name="invalidPasswordTest" finished-at="2026-08-31T17:50:04 IST" duration-ms="181" status="PASS">
+        <test-method signature="invalidPasswordTest()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T18:03:02 IST" name="invalidPasswordTest" finished-at="2026-08-31T18:03:02 IST" duration-ms="195" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- invalidPasswordTest -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T17:50:04 IST" name="tearDown" finished-at="2026-08-31T17:50:04 IST" duration-ms="160" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T18:03:02 IST" name="tearDown" finished-at="2026-08-31T18:03:02 IST" duration-ms="184" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T17:50:04 IST" name="setUp" finished-at="2026-08-31T17:50:06 IST" duration-ms="1742" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T18:03:02 IST" name="setUp" finished-at="2026-08-31T18:03:04 IST" duration-ms="1229" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="validLoginTest()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T17:50:06 IST" name="validLoginTest" finished-at="2026-08-31T17:50:06 IST" duration-ms="200" status="PASS">
+        <test-method signature="validLoginTest()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T18:03:04 IST" name="validLoginTest" finished-at="2026-08-31T18:03:04 IST" duration-ms="199" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validLoginTest -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T17:50:06 IST" name="tearDown" finished-at="2026-08-31T17:50:06 IST" duration-ms="152" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:LoginTest@5b0abc94]" started-at="2026-08-31T18:03:04 IST" name="tearDown" finished-at="2026-08-31T18:03:04 IST" duration-ms="143" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->

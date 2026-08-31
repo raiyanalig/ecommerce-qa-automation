@@ -10,6 +10,7 @@ public class LoginPage {
     By username = By.id("user-name");
     By password = By.id("password");
     By loginButton = By.id("login-button");
+    By loginError = By.cssSelector("[data-test='error']");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -26,4 +27,7 @@ public class LoginPage {
     public void clickLogin() {
         driver.findElement(loginButton).click();
     }
+    public boolean isLoginErrorDisplayed() {
+    return driver.findElement(loginError).isDisplayed();
+}
 }

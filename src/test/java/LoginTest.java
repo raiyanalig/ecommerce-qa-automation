@@ -1,5 +1,6 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import pages.LoginPage;
 
 public class LoginTest extends BaseTest {
@@ -22,21 +23,17 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void invalidPasswordTest() {
+public void invalidPasswordTest() {
 
-        LoginPage loginPage = new LoginPage(driver);
+    LoginPage loginPage = new LoginPage(driver);
 
-        loginPage.enterUsername("standard_user");
-        loginPage.enterPassword("wrong_password");
-        loginPage.clickLogin();
+    loginPage.enterUsername("standard_user");
+    loginPage.enterPassword("wrong_password");
+    loginPage.clickLogin();
 
-        boolean errorDisplayed = driver.findElement(
-                org.openqa.selenium.By.cssSelector("[data-test='error']")
-        ).isDisplayed();
-
-        Assert.assertTrue(
-                errorDisplayed,
-                "Error message was not displayed"
-        );
-    }
+    Assert.assertTrue(
+            loginPage.isLoginErrorDisplayed(),
+            "Error message was not displayed"
+    );
+}
 }
