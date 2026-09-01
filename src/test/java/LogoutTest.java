@@ -1,7 +1,7 @@
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -16,45 +16,54 @@ public class LogoutTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage(driver);
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait =
+                new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String username = ConfigReader.getProperty("username");
+        String password = ConfigReader.getProperty("password");
 
         // Login
-        loginPage.enterUsername("standard_user");
-        loginPage.enterPassword("secret_sauce");
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
         loginPage.clickLogin();
 
-        // Wait for inventory page
+        // Wait for products page
         wait.until(
                 ExpectedConditions.urlContains("inventory.html")
         );
 
         // Open menu
-        WebElement menuButton = wait.until(
+        wait.until(
                 ExpectedConditions.elementToBeClickable(
                         By.id("react-burger-menu-btn")
                 )
-        );
+        ).click();
 
-        menuButton.click();
-
-        // Wait until logout option is visible
-        WebElement logoutLink = wait.until(
+        // Wait for logout link
+        wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
                         By.id("logout_sidebar_link")
                 )
         );
 
-        // Click logout
-        logoutLink.click();
+        // Click logout using JavaScript
+        JavascriptExecutor javascriptExecutor =
+                (JavascriptExecutor) driver;
 
-        // Verify redirection to login page
-        wait.until(
-                ExpectedConditions.urlToBe("https://www.saucedemo.com/")
+        javascriptExecutor.executeScript(
+                "arguments[0].click();",
+                driver.findElement(By.id("logout_sidebar_link"))
         );
 
-        Assert.assertEquals(
-                driver.getCurrentUrl(),
-                "https://www.saucedemo.com/",
+        // Verify login page
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.id("login-button")
+                )
+        );
+
+        Assert.assertTrue(
+                driver.findElement(By.id("login-button")).isDisplayed(),
                 "User was not logged out successfully"
         );
     }

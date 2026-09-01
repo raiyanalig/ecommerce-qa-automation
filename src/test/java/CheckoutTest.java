@@ -16,9 +16,12 @@ public class CheckoutTest extends BaseTest {
         CartPage cartPage = new CartPage(driver);
         CheckoutPage checkoutPage = new CheckoutPage(driver);
 
+        String username = ConfigReader.getProperty("username");
+        String password = ConfigReader.getProperty("password");
+
         // Login
-        loginPage.enterUsername("standard_user");
-        loginPage.enterPassword("secret_sauce");
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
         loginPage.clickLogin();
 
         // Add product
@@ -47,14 +50,13 @@ public class CheckoutTest extends BaseTest {
         // Continue to order overview
         checkoutPage.clickContinue();
 
-        // Debug information
-       // Finish order
-checkoutPage.clickFinish();
+        // Finish order
+        checkoutPage.clickFinish();
 
-// Verify order confirmation
-Assert.assertTrue(
-        checkoutPage.isOrderConfirmed(),
-        "Order confirmation was not displayed"
-);
+        // Verify order confirmation
+        Assert.assertTrue(
+                checkoutPage.isOrderConfirmed(),
+                "Order confirmation was not displayed"
+        );
     }
 }

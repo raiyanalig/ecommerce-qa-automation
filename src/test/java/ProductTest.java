@@ -12,8 +12,11 @@ public class ProductTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         ProductPage productPage = new ProductPage(driver);
 
-        loginPage.enterUsername("standard_user");
-        loginPage.enterPassword("secret_sauce");
+        String username = ConfigReader.getProperty("username");
+        String password = ConfigReader.getProperty("password");
+
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
         loginPage.clickLogin();
 
         Assert.assertTrue(
@@ -28,8 +31,11 @@ public class ProductTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         ProductPage productPage = new ProductPage(driver);
 
-        loginPage.enterUsername("standard_user");
-        loginPage.enterPassword("secret_sauce");
+        String username = ConfigReader.getProperty("username");
+        String password = ConfigReader.getProperty("password");
+
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
         loginPage.clickLogin();
 
         productPage.addFirstProductToCart();

@@ -14,8 +14,11 @@ public class CartTest extends BaseTest {
         ProductPage productPage = new ProductPage(driver);
         CartPage cartPage = new CartPage(driver);
 
-        loginPage.enterUsername("standard_user");
-        loginPage.enterPassword("secret_sauce");
+        String username = ConfigReader.getProperty("username");
+        String password = ConfigReader.getProperty("password");
+
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
         loginPage.clickLogin();
 
         productPage.addFirstProductToCart();
@@ -40,8 +43,11 @@ public class CartTest extends BaseTest {
         ProductPage productPage = new ProductPage(driver);
         CartPage cartPage = new CartPage(driver);
 
-        loginPage.enterUsername("standard_user");
-        loginPage.enterPassword("secret_sauce");
+        String username = ConfigReader.getProperty("username");
+        String password = ConfigReader.getProperty("password");
+
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
         loginPage.clickLogin();
 
         productPage.addFirstProductToCart();

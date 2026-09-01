@@ -10,8 +10,11 @@ public class LoginTest extends BaseTest {
 
         LoginPage loginPage = new LoginPage(driver);
 
-        loginPage.enterUsername("standard_user");
-        loginPage.enterPassword("secret_sauce");
+        String username = ConfigReader.getProperty("username");
+        String password = ConfigReader.getProperty("password");
+
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
         loginPage.clickLogin();
 
         String currentUrl = driver.getCurrentUrl();
@@ -23,17 +26,19 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-public void invalidPasswordTest() {
+    public void invalidPasswordTest() {
 
-    LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
 
-    loginPage.enterUsername("standard_user");
-    loginPage.enterPassword("wrong_password");
-    loginPage.clickLogin();
+        String username = ConfigReader.getProperty("username");
 
-    Assert.assertTrue(
-            loginPage.isLoginErrorDisplayed(),
-            "Error message was not displayed"
-    );
-}
+        loginPage.enterUsername(username);
+        loginPage.enterPassword("wrong_password");
+        loginPage.clickLogin();
+
+        Assert.assertTrue(
+                loginPage.isLoginErrorDisplayed(),
+                "Error message was not displayed"
+        );
+    }
 }

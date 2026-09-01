@@ -1,3 +1,5 @@
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -9,13 +11,29 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        driver = new ChromeDriver();
+
+        String browser = ConfigReader.getProperty("browser");
+        String baseUrl = ConfigReader.getProperty("baseUrl");
+
+        if (browser.equalsIgnoreCase("chrome")) {
+            driver = new ChromeDriver();
+        } else {
+            throw new RuntimeException(
+                    "Unsupported browser: " + browser
+            );
+        }
+
         driver.manage().window().maximize();
-        driver.get("https://www.saucedemo.com/");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+        driver.get(baseUrl);
     }
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
+
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
