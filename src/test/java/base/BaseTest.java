@@ -1,9 +1,13 @@
+package base;
+
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import utils.ConfigReader;
 
 public class BaseTest {
 
@@ -24,7 +28,10 @@ public class BaseTest {
         }
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+        driver.manage().timeouts().implicitlyWait(
+                Duration.ofSeconds(5)
+        );
 
         driver.get(baseUrl);
     }
@@ -35,5 +42,9 @@ public class BaseTest {
         if (driver != null) {
             driver.quit();
         }
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }

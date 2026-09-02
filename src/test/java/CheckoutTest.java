@@ -1,10 +1,12 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import base.BaseTest;
 import pages.CartPage;
 import pages.CheckoutPage;
 import pages.LoginPage;
 import pages.ProductPage;
+import utils.ConfigReader;
 
 public class CheckoutTest extends BaseTest {
 
@@ -24,33 +26,32 @@ public class CheckoutTest extends BaseTest {
         loginPage.enterPassword(password);
         loginPage.clickLogin();
 
-        // Add product
+        // Add product and open cart
         productPage.addFirstProductToCart();
-
-        // Open cart
         productPage.openCart();
 
-        // Verify product is in cart
+        Assert.assertTrue(
+                cartPage.isCartPageDisplayed(),
+                "Cart page was not displayed"
+        );
+
         Assert.assertEquals(
                 cartPage.getCartItemCount(),
                 1,
                 "Cart should contain one product"
         );
 
-        // Start checkout
+        // Checkout
         checkoutPage.clickCheckout();
 
-        // Enter customer details
         checkoutPage.enterCustomerDetails(
                 "Raiyan",
                 "Ali",
                 "144001"
         );
 
-        // Continue to order overview
         checkoutPage.clickContinue();
 
-        // Finish order
         checkoutPage.clickFinish();
 
         // Verify order confirmation

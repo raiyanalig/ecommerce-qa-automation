@@ -1,6 +1,11 @@
 package pages;
+
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CheckoutPage {
 
@@ -19,7 +24,13 @@ public class CheckoutPage {
     }
 
     public void clickCheckout() {
-        driver.findElement(checkoutButton).click();
+
+        WebDriverWait wait =
+                new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(
+                ExpectedConditions.elementToBeClickable(checkoutButton)
+        ).click();
     }
 
     public void enterCustomerDetails(
@@ -27,20 +38,50 @@ public class CheckoutPage {
             String lastNameValue,
             String postalCodeValue) {
 
-        driver.findElement(firstName).sendKeys(firstNameValue);
+        WebDriverWait wait =
+                new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(firstName)
+        ).sendKeys(firstNameValue);
+
         driver.findElement(lastName).sendKeys(lastNameValue);
         driver.findElement(postalCode).sendKeys(postalCodeValue);
     }
 
     public void clickContinue() {
-        driver.findElement(continueButton).click();
+
+        WebDriverWait wait =
+                new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(
+                ExpectedConditions.elementToBeClickable(continueButton)
+        ).click();
+
+        wait.until(
+                ExpectedConditions.urlContains("checkout-step-two.html")
+        );
     }
 
     public void clickFinish() {
-        driver.findElement(finishButton).click();
+
+        WebDriverWait wait =
+                new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(
+                ExpectedConditions.elementToBeClickable(finishButton)
+        ).click();
     }
 
     public boolean isOrderConfirmed() {
-        return driver.findElement(confirmationMessage).isDisplayed();
+
+        WebDriverWait wait =
+                new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        confirmationMessage
+                )
+        ).isDisplayed();
     }
 }

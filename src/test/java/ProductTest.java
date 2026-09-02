@@ -1,8 +1,10 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import base.BaseTest;
 import pages.LoginPage;
 import pages.ProductPage;
+import utils.ConfigReader;
 
 public class ProductTest extends BaseTest {
 
