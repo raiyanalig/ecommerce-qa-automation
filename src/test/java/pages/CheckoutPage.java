@@ -26,11 +26,19 @@ public class CheckoutPage {
     public void clickCheckout() {
 
         WebDriverWait wait =
-                new WebDriverWait(driver, Duration.ofSeconds(10));
+                new WebDriverWait(driver, Duration.ofSeconds(15));
 
         wait.until(
                 ExpectedConditions.elementToBeClickable(checkoutButton)
         ).click();
+
+        wait.until(
+                ExpectedConditions.urlContains("checkout-step-one.html")
+        );
+
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(firstName)
+        );
     }
 
     public void enterCustomerDetails(
@@ -39,20 +47,25 @@ public class CheckoutPage {
             String postalCodeValue) {
 
         WebDriverWait wait =
-                new WebDriverWait(driver, Duration.ofSeconds(10));
+                new WebDriverWait(driver, Duration.ofSeconds(15));
 
         wait.until(
                 ExpectedConditions.visibilityOfElementLocated(firstName)
         ).sendKeys(firstNameValue);
 
-        driver.findElement(lastName).sendKeys(lastNameValue);
-        driver.findElement(postalCode).sendKeys(postalCodeValue);
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(lastName)
+        ).sendKeys(lastNameValue);
+
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(postalCode)
+        ).sendKeys(postalCodeValue);
     }
 
     public void clickContinue() {
 
         WebDriverWait wait =
-                new WebDriverWait(driver, Duration.ofSeconds(10));
+                new WebDriverWait(driver, Duration.ofSeconds(15));
 
         wait.until(
                 ExpectedConditions.elementToBeClickable(continueButton)
@@ -61,12 +74,16 @@ public class CheckoutPage {
         wait.until(
                 ExpectedConditions.urlContains("checkout-step-two.html")
         );
+
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(finishButton)
+        );
     }
 
     public void clickFinish() {
 
         WebDriverWait wait =
-                new WebDriverWait(driver, Duration.ofSeconds(10));
+                new WebDriverWait(driver, Duration.ofSeconds(15));
 
         wait.until(
                 ExpectedConditions.elementToBeClickable(finishButton)
@@ -76,7 +93,7 @@ public class CheckoutPage {
     public boolean isOrderConfirmed() {
 
         WebDriverWait wait =
-                new WebDriverWait(driver, Duration.ofSeconds(10));
+                new WebDriverWait(driver, Duration.ofSeconds(15));
 
         return wait.until(
                 ExpectedConditions.visibilityOfElementLocated(
