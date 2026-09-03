@@ -3,7 +3,9 @@ package pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -18,6 +20,7 @@ public class CheckoutPage {
     By continueButton = By.id("continue");
     By finishButton = By.id("finish");
     By confirmationMessage = By.className("complete-header");
+    By checkoutError = By.cssSelector("[data-test='error']");
 
     public CheckoutPage(WebDriver driver) {
         this.driver = driver;
@@ -67,16 +70,51 @@ public class CheckoutPage {
         WebDriverWait wait =
                 new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        wait.until(
-                ExpectedConditions.elementToBeClickable(continueButton)
-        ).click();
+        WebElement continueElement =
+                wait.until(
+                        ExpectedConditions.elementToBeClickable(
+                                continueButton
+                        )
+                );
 
-        wait.until(
-                ExpectedConditions.urlContains("checkout-step-two.html")
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                continueElement
         );
 
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].click();",
+                continueElement
+        );
+
+        try {
+
+            wait.until(
+                    ExpectedConditions.urlContains(
+                            "checkout-step-two.html"
+                    )
+            );
+
+        } catch (Exception e) {
+
+            if (!driver.findElements(checkoutError).isEmpty()) {
+
+                String errorMessage =
+                        driver.findElement(checkoutError).getText();
+
+                throw new RuntimeException(
+                        "Checkout validation failed: "
+                                + errorMessage
+                );
+            }
+
+            throw e;
+        }
+
         wait.until(
-                ExpectedConditions.visibilityOfElementLocated(finishButton)
+                ExpectedConditions.visibilityOfElementLocated(
+                        finishButton
+                )
         );
     }
 
@@ -85,9 +123,19 @@ public class CheckoutPage {
         WebDriverWait wait =
                 new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        wait.until(
-                ExpectedConditions.elementToBeClickable(finishButton)
-        ).click();
+        WebElement finishElement =
+                wait.until(
+                        ExpectedConditions.elementToBeClickable(
+                                finishButton
+                        )
+                );
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block:'center'});",
+                finishElement
+        );
+
+        finishElement.click();
     }
 
     public boolean isOrderConfirmed() {
